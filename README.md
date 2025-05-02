@@ -46,15 +46,24 @@ Sistema para gerenciamento de mesas de poker presenciais, com administração de
 
 ```
 src/
-├── core/ # Entidades e lógica principal
-├── use-cases/ # Casos de uso
-├── repositories/ # Interfaces e implementações de acesso a dados
-├── controllers/ # Lógica HTTP
-├── routes/ # Registro de rotas
-├── errors/ # Classes de erros personalizados
-├── utils/ # Funções auxiliares
-└── server.ts # Instância Fastify
+├── core/              # Entidades, regras de negócio e lógica de domínio
+├── routes/            # Rotas HTTP
+├── controllers/       # Controllers que lidam com a entrada HTTP
+├── use-cases/         # Casos de uso
+├── repositories/      # Abstração de acesso a dados
+├── errors/            # Erros personalizados e mapeamento para status code
+├── env/               # Validação e carregamento de variáveis de ambiente
+└── server.ts          # Inicialização do Fastify
 ```
+
+## 📌 Objetivo da aplicação
+- Criação e entrada em mesas de poker via token de acesso
+- Controle de jogadores e início da partida
+- Apostas, blinds e lógica de distribuição de fichas
+- Gestão de rodada e ações com temporizador
+- Visibilidade e controle do jogo via regras de negócio
+
+⚠️ Esta aplicação é apenas o backend. O frontend será desenvolvido separadamente após o backend estar completo e hospedado.
 
 ## ⚙️ Instalação (em breve)
 
