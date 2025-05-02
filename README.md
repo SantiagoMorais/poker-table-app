@@ -3,9 +3,10 @@
 Sistema para gerenciamento de mesas de poker presenciais, com administração de fichas e regras, criado com Fastify e arquitetura SOLID.
 
 ## Sumário
+
 - [Stack](#-stack)
 - [Funcionalidades](#-funcionalidades)
-    - [Fluxo Geral](#fluxo-geral)
+  - [Fluxo Geral](#fluxo-geral)
 - [Estrutura de Pastas](#-estrutura-de-pastas)
 - [Instalação](#-instalação-em-breve)
 - [Notas](#-notas)
@@ -57,6 +58,7 @@ src/
 ```
 
 ## 📌 Objetivo da aplicação
+
 - Criação e entrada em mesas de poker via token de acesso
 - Controle de jogadores e início da partida
 - Apostas, blinds e lógica de distribuição de fichas
@@ -88,5 +90,3 @@ npm run server
 - Instagram - [@felipe.santiago.morais](https://www.instagram.com/felipe.santiago.morais)
 - Email - <a href="mailto:contatofelipesantiago@gmail.com" target="blank">contatofelipesantiago@gmail.com</a>
 - <a href="https://api.whatsapp.com/send?phone=5531996951033&text=Hi%2C%20Felipe%21%20I%20got%20your%20contact%20from%20your%20github.">Whatsapp</a>
-
-
