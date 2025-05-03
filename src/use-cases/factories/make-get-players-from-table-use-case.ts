@@ -1,10 +1,9 @@
-import { InMemoryTableRepository } from "@/repositories/in-memory/in-memory-tables-repository";
+import { singletonTableRepository } from "@/repositories/singleton-table-repository";
 
 import { GetPlayersFromTableUseCase } from "../table/get-players-from-table";
 
 export const makeGetPlayersFromTableUseCase = () => {
-  const tablesRepository = new InMemoryTableRepository();
-  const useCase = new GetPlayersFromTableUseCase(tablesRepository);
+  const useCase = new GetPlayersFromTableUseCase(singletonTableRepository);
 
   return useCase;
 };

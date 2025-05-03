@@ -1,10 +1,9 @@
-import { InMemoryTableRepository } from "@/repositories/in-memory/in-memory-tables-repository";
+import { singletonTableRepository } from "@/repositories/singleton-table-repository";
 
 import { JoinTableUseCase } from "../table/join-table";
 
 export const makeJoinTableUseCase = () => {
-  const tablesRepository = new InMemoryTableRepository();
-  const useCase = new JoinTableUseCase(tablesRepository);
+  const useCase = new JoinTableUseCase(singletonTableRepository);
 
   return useCase;
 };

@@ -17,6 +17,7 @@ export const createTableController = async (
   }
 
   const { tableName, ownerName } = parseResult.data.body;
+
   const createTableUseCase = makeCreateTableUseCase();
 
   try {

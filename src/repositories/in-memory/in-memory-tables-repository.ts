@@ -3,7 +3,6 @@ import { Table } from "@/core/entities/table";
 import { ITablesRepository } from "../tables-repository";
 
 export class InMemoryTableRepository implements ITablesRepository {
-  private static instance: InMemoryTableRepository;
   private tables: Table[] = [];
 
   async create(table: Table): Promise<void> {
