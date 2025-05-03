@@ -3,7 +3,6 @@ import { beforeEach, describe, expect, it } from "vitest";
 import { PlayerAlreadyExistsError } from "@/core/errors/player-already-exists-error";
 import { ResourceNotFoundError } from "@/core/errors/resource-not-found-error";
 import { TableFullError } from "@/core/errors/table-full-error";
-import { TCreateTableInputDTO } from "@/core/types/create-table-input";
 import { InMemoryTableRepository } from "@/repositories/in-memory/in-memory-tables-repository";
 import { ITablesRepository } from "@/repositories/tables-repository";
 
