@@ -1,7 +1,6 @@
 import { FastifyReply, FastifyRequest } from "fastify";
 
-import { InMemoryTableRepository } from "@/repositories/in-memory/in-memory-tables-repository";
-import { JoinTableUseCase } from "@/use-cases/table/join-table";
+import { makeJoinTableUseCase } from "@/use-cases/factories/make-join-table-use-case";
 
 export async function joinTableController(
   request: FastifyRequest,
@@ -12,8 +11,7 @@ export async function joinTableController(
     playerName: string;
   };
 
-  const tablesRepository = InMemoryTableRepository.getInstance();
-  const joinTableUseCase = new JoinTableUseCase(tablesRepository);
+  const joinTableUseCase = makeJoinTableUseCase();
 
   try {
     const { tableId, playerId } = await joinTableUseCase.execute({

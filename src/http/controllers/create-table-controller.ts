@@ -1,12 +1,7 @@
 import { FastifyReply, FastifyRequest } from "fastify";
-import z from "zod";
 
 import { createTableSchema } from "@/core/schemas/create-table-schema";
-import { InMemoryTableRepository } from "@/repositories/in-memory/in-memory-tables-repository";
-import { CreateTableUseCase } from "@/use-cases/table/create-table";
-
-const tableRepository = new InMemoryTableRepository();
-const createTableUseCase = new CreateTableUseCase(tableRepository);
+import { makeCreateTableUseCase } from "@/use-cases/factories/make-create-table-use-case";
 
 export const createTableController = async (
   request: FastifyRequest,
@@ -22,6 +17,7 @@ export const createTableController = async (
   }
 
   const { tableName, ownerName } = parseResult.data.body;
+  const createTableUseCase = makeCreateTableUseCase();
 
   try {
     const { table } = await createTableUseCase.execute({

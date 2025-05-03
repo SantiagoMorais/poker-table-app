@@ -1,7 +1,6 @@
 import { FastifyReply, FastifyRequest } from "fastify";
 
-import { InMemoryTableRepository } from "@/repositories/in-memory/in-memory-tables-repository";
-import { GetPlayersFromTableUseCase } from "@/use-cases/table/get-players-from-table";
+import { makeGetPlayersFromTableUseCase } from "@/use-cases/factories/make-get-players-from-table-use-case";
 
 export const getPlayersFromTableController = async (
   request: FastifyRequest<{ Params: { token: string } }>,
@@ -9,10 +8,7 @@ export const getPlayersFromTableController = async (
 ) => {
   const { token } = request.params;
 
-  const tablesRepository = InMemoryTableRepository.getInstance();
-  const getPlayersFromTableUseCase = new GetPlayersFromTableUseCase(
-    tablesRepository
-  );
+  const getPlayersFromTableUseCase = makeGetPlayersFromTableUseCase();
 
   try {
     const { players } = await getPlayersFromTableUseCase.execute(token);
