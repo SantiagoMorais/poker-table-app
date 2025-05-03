@@ -4,7 +4,7 @@ import { Table } from "@/core/entities/table";
 import {
   createTableInput,
   TCreateTableInputDTO,
-} from "@/core/types/crate-table-input";
+} from "@/core/types/create-table-input";
 import { ITablesRepository } from "@/repositories/tables-repository";
 
 export class CreateTableUseCase {
