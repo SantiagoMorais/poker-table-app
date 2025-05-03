@@ -6,7 +6,9 @@
   "scripts": {
     "server": "tsx src/server.ts",
     "test:unit": "vitest run --dir src/use-cases",
-    "test:unit:watch": "vitest --dir src/use-cases"
+    "test:unit:watch": "vitest --dir src/use-cases",
+    "test:e2e": "vitest run --dir src/http/controllers",
+    "test:e2e:watch": "vitest --dir src/http/controllers"
   },
   "keywords": [],
   "author": "",
@@ -16,6 +18,7 @@
     "@eslint/js": "^9.26.0",
     "@types/node": "^22.15.3",
     "@types/socket.io": "^3.0.1",
+    "@types/supertest": "^6.0.3",
     "@typescript-eslint/eslint-plugin": "^8.31.1",
     "@typescript-eslint/parser": "^8.31.1",
     "eslint": "^9.26.0",
@@ -24,6 +27,7 @@
     "eslint-plugin-simple-import-sort": "^12.1.1",
     "globals": "^16.0.0",
     "prettier": "^3.5.3",
+    "supertest": "^7.1.0",
     "tsx": "^4.19.4",
     "typescript": "^5.8.3",
     "typescript-eslint": "^8.31.1",

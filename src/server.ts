@@ -2,7 +2,7 @@ import fastify from "fastify";
 
 import { tablesRoutes } from "./http/routes/tables";
 
-const app = fastify();
+export const app = fastify();
 const port = 3333;
 
 app.register(tablesRoutes);
