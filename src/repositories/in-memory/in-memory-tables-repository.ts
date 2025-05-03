@@ -27,11 +27,4 @@ export class InMemoryTableRepository implements ITablesRepository {
   async clear(): Promise<void> {
     this.tables = [];
   }
-
-  static getInstance(): InMemoryTableRepository {
-    if (!InMemoryTableRepository.instance) {
-      InMemoryTableRepository.instance = new InMemoryTableRepository();
-    }
-    return InMemoryTableRepository.instance;
-  }
 }
