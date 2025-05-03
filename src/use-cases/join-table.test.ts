@@ -2,6 +2,7 @@ import { beforeEach, describe, expect, it } from "vitest";
 
 import { PlayerAlreadyExistsError } from "@/core/errors/player-already-exists-error";
 import { ResourceNotFoundError } from "@/core/errors/resource-not-found-error";
+import { TableFullError } from "@/core/errors/table-full-error";
 import { TCreateTableInputDTO } from "@/core/types/create-table-input";
 import { InMemoryTableRepository } from "@/repositories/in-memory/in-memory-tables-repository";
 import { ITablesRepository } from "@/repositories/tables-repository";
@@ -51,5 +52,23 @@ describe("JoinTableUseCase", () => {
     await expect(() =>
       sut.execute({ playerName: "John Doe", token: "inexisted-token" })
     ).rejects.toBeInstanceOf(ResourceNotFoundError);
+  });
+
+  it("should not allow joining a full table", async () => {
+    const { table } = await createTableUseCase.execute({
+      ownerName: "John Doe",
+      tableName: "Poker Night",
+    });
+
+    for (let i = 0; i < 7; i++) {
+      await sut.execute({
+        playerName: `Player ${i}`,
+        token: table.token,
+      });
+    }
+
+    await expect(() =>
+      sut.execute({ playerName: "New Player", token: table.token })
+    ).rejects.toBeInstanceOf(TableFullError);
   });
 });

@@ -1,6 +1,7 @@
 import { Player } from "@/core/entities/player";
 import { PlayerAlreadyExistsError } from "@/core/errors/player-already-exists-error";
 import { ResourceNotFoundError } from "@/core/errors/resource-not-found-error";
+import { TableFullError } from "@/core/errors/table-full-error";
 import {
   JoinTableUseCaseRequest,
   JoinTableUseCaseResponse,
@@ -18,6 +19,10 @@ export class JoinTableUseCase {
 
     if (!table) {
       throw new ResourceNotFoundError("Table not found");
+    }
+
+    if (table.players.length >= 8) {
+      throw new TableFullError(8);
     }
 
     const playerAlreadyExists = table.players.some(
