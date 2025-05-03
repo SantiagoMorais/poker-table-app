@@ -1,4 +1,5 @@
 import { Table } from "@/core/entities/table";
+import { ResourceNotFoundError } from "@/core/errors/resource-not-found-error";
 
 import { ITablesRepository } from "../tables-repository";
 
@@ -25,5 +26,14 @@ export class InMemoryTableRepository implements ITablesRepository {
 
   async clear(): Promise<void> {
     this.tables = [];
+  }
+
+  async save(table: Table): Promise<void> {
+    const index = this.tables.findIndex((t) => t.id === table.id);
+    if (index !== -1) {
+      this.tables[index] = table;
+    } else {
+      throw new ResourceNotFoundError("Table not found");
+    }
   }
 }
