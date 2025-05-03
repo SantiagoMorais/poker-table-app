@@ -3,7 +3,7 @@ import z from "zod";
 
 import { createTableSchema } from "@/core/schemas/create-table-schema";
 import { InMemoryTableRepository } from "@/repositories/in-memory/in-memory-tables-repository";
-import { CreateTableUseCase } from "@/use-cases/create-table";
+import { CreateTableUseCase } from "@/use-cases/table/create-table";
 
 const tableRepository = new InMemoryTableRepository();
 const createTableUseCase = new CreateTableUseCase(tableRepository);

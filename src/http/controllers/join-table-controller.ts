@@ -1,7 +1,7 @@
 import { FastifyReply, FastifyRequest } from "fastify";
 
 import { InMemoryTableRepository } from "@/repositories/in-memory/in-memory-tables-repository";
-import { JoinTableUseCase } from "@/use-cases/join-table";
+import { JoinTableUseCase } from "@/use-cases/table/join-table";
 
 export async function joinTableController(
   request: FastifyRequest,
