@@ -1,7 +1,6 @@
 import request from "supertest";
 import { afterAll, beforeAll, describe, expect, it } from "vitest";
 
-import { createTableSchema } from "@/core/schemas/create-table-schema";
 import { app } from "@/server";
 
 describe("Create Table E2E", () => {
@@ -13,7 +12,7 @@ describe("Create Table E2E", () => {
     await app.close();
   });
 
-  it("shoud be able to create a table", async () => {
+  it("should create a table and return 201 with table data", async () => {
     const table = await request(app.server).post("/tables").send({
       tableName: "Poker table",
       ownerName: "John Doe",
