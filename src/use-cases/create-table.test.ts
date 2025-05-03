@@ -10,18 +10,16 @@ let tablesRepository: ITablesRepository;
 let sut: CreateTableUseCase;
 
 describe("CreateTableUseCase", () => {
-  beforeEach(async () => {
+  beforeEach(() => {
     tablesRepository = new InMemoryTableRepository();
     sut = new CreateTableUseCase(tablesRepository);
   });
 
   it("should be able to create a table", async () => {
-    const input: TCreateTableInputDTO = {
+    const { table } = await sut.execute({
       ownerName: "John Doe",
       tableName: "Poker Night",
-    };
-
-    const { table } = await sut.execute(input);
+    });
 
     expect(table.players).toHaveLength(1);
     expect(table.name).toEqual("Poker Night");
