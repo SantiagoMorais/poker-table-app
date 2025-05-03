@@ -4,7 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "server": "tsx src/server.ts",
+    "test:unit": "vitest run --dir src/use-cases",
+    "test:unit:watch": "vitest --dir src/use-cases"
   },
   "keywords": [],
   "author": "",
@@ -24,7 +26,8 @@
     "prettier": "^3.5.3",
     "tsx": "^4.19.4",
     "typescript": "^5.8.3",
-    "typescript-eslint": "^8.31.1"
+    "typescript-eslint": "^8.31.1",
+    "vite-tsconfig-paths": "^5.1.4"
   },
   "dependencies": {
     "cors": "^2.8.5",
@@ -32,6 +35,7 @@
     "fastify": "^5.3.2",
     "socket.io": "^4.8.1",
     "uuid": "^11.1.0",
+    "vitest": "^3.1.2",
     "zod": "^3.24.3"
   }
 }
