@@ -1,5 +1,6 @@
-// src/use-cases/join-table.ts
 import { Player } from "@/core/entities/player";
+import { PlayerAlreadyExistsError } from "@/core/errors/player-already-exists-error";
+import { ResourceNotFoundError } from "@/core/errors/resource-not-found-error";
 import {
   JoinTableUseCaseRequest,
   JoinTableUseCaseResponse,
@@ -16,7 +17,7 @@ export class JoinTableUseCase {
     const table = await this.tablesRepository.findByToken(token);
 
     if (!table) {
-      throw new Error("Table not found");
+      throw new ResourceNotFoundError("Table not found");
     }
 
     const playerAlreadyExists = table.players.some(
@@ -24,7 +25,7 @@ export class JoinTableUseCase {
     );
 
     if (playerAlreadyExists) {
-      throw new Error("Player with this name already exists in the table");
+      throw new PlayerAlreadyExistsError();
     }
 
     const player = new Player(playerName);
