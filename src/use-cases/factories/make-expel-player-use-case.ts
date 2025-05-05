@@ -1,9 +1,10 @@
-import { singletonTableRepository } from "@/repositories/singleton-table-repository";
+import { InMemoryTableRepository } from "@/repositories/in-memory-repository/in-memory-table-repository";
 
 import { ExpelPlayerUseCase } from "../table/expel-player";
 
 export const makeExpelPlayerUseCase = () => {
-  const useCase = new ExpelPlayerUseCase(singletonTableRepository);
+  const tableRepository = new InMemoryTableRepository();
+  const useCase = new ExpelPlayerUseCase(tableRepository);
 
   return useCase;
 };
