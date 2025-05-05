@@ -1,20 +1,22 @@
+import { Player } from "@/core/entities/player";
 import { ActionNotPermittedError } from "@/core/errors/action-not-permitted-error";
 import { ResourceNotFoundError } from "@/core/errors/resource-not-found-error";
 import { IExpelPlayerUseCase } from "@/core/interfaces/expel-player-use-case";
-import { IPlayer } from "@/core/interfaces/player";
 import { ITablesRepository } from "@/repositories/tables-repository";
 
 export class ExpelPlayerUseCase {
   constructor(private tablesRepository: ITablesRepository) {}
 
   async execute({ playerName, token }: IExpelPlayerUseCase): Promise<{
-    players: IPlayer[];
+    players: Player[];
   }> {
-    const table = await this.tablesRepository.findByToken(token);
+    const response = await this.tablesRepository.findByToken({ token });
 
-    if (!table) {
+    if (!response) {
       throw new ResourceNotFoundError("Table not found");
     }
+
+    const table = response.table;
 
     if (table.isLocked) {
       throw new ActionNotPermittedError(
@@ -31,7 +33,7 @@ export class ExpelPlayerUseCase {
     }
 
     table.players.splice(playerIndex, 1);
-    await this.tablesRepository.save(table);
+    await this.tablesRepository.save({ table });
 
     return { players: table.players };
   }
