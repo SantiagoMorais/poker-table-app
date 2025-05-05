@@ -7,6 +7,20 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+model Table {
+  id        String   @id @default(cuid())
+  token     String   @unique
+  tableName String
+  isVisible Boolean  @default(true)
+  isLocked  Boolean  @default(false)
+  createdAt DateTime @default(now())
+  ownerId   String?  @unique
+
+  players Player[]
+
+  @@map("tables")
+}
+
 model Player {
   id      String  @id @default(cuid())
   name    String
@@ -17,17 +31,4 @@ model Player {
   table   Table? @relation(fields: [tableId], references: [id])
 
   @@map("players")
-}
-
-model Table {
-  id        String   @id @default(cuid())
-  token     String   @unique
-  tableName String
-  isVisible Boolean  @default(true)
-  isLocked  Boolean  @default(false)
-  createdAt DateTime @default(now())
-
-  players Player[]
-
-  @@map("tables")
 }
