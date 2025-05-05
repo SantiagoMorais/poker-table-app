@@ -1,17 +1,17 @@
 import { randomUUID } from "crypto";
 
-import { IPlayer } from "../interfaces/player";
 import { ITableProps } from "../interfaces/table-props";
+import { Player } from "./player";
 
 export class Table {
   private _id: string;
-  private props: Required<ITableProps>;
+  private props: Omit<ITableProps, "token"> & { token: string };
 
   constructor(props: ITableProps, id?: string) {
     this._id = id ?? randomUUID();
     this.props = {
       ...props,
-      token: props.token ?? this.generateToken(),
+      token: this.generateToken(),
       isVisible: props.isVisible ?? true,
       isLocked: props.isLocked ?? false,
       players: props.players ?? [],
@@ -55,9 +55,16 @@ export class Table {
     return this.props.createdAt;
   }
 
-  addPlayer(player: IPlayer) {
+  addPlayer(player: Player) {
+    if (!this.props.players) this.props.players = [];
+
     if (this.props.players.length >= 8) return;
+
     this.props.players.push(player);
+
+    if (!this.props.ownerId) {
+      this.props.ownerId = player.id;
+    }
   }
 
   lockTable() {
@@ -68,5 +75,19 @@ export class Table {
   unlockTable() {
     this.props.isLocked = false;
     this.props.isVisible = true;
+  }
+
+  updateOwner({ ownerId }: { ownerId: string }, force = false) {
+    if (force || !this.props.ownerId) this.props.ownerId = ownerId;
+  }
+
+  changeOwnerToNextPlayer() {
+    const nextPlayer = this.props.players?.find(
+      (p) => p.id !== this.props.ownerId
+    );
+    if (nextPlayer) {
+      this.props.ownerId = nextPlayer.id;
+      nextPlayer.isOwner = true;
+    }
   }
 }

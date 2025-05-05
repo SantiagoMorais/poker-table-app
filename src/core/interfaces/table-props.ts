@@ -1,11 +1,11 @@
-import { IPlayer } from "./player";
+import { Player } from "../entities/player";
 
 export interface ITableProps {
+  id?: string;
   tableName: string;
-  ownerId: string;
-  token?: string;
-  isVisible?: boolean;
   isLocked: boolean;
-  players?: Array<IPlayer>;
+  isVisible?: boolean;
   createdAt?: Date;
+  ownerId?: string;
+  players: Array<Player>;
 }

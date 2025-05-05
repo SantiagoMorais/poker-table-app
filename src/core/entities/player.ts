@@ -5,16 +5,28 @@ export class Player {
   private _name: string;
   private _chips: number;
   private _isOwner: boolean;
+  private _tableToken: string;
 
-  constructor(name: string, isOwner = false, chips = 500, id?: string) {
+  constructor(
+    name: string,
+    isOwner: boolean = false,
+    tableToken: string,
+    chips = 500,
+    id?: string
+  ) {
     this._id = id ?? randomUUID();
     this._name = name;
+    this._tableToken = tableToken;
     this._chips = chips;
     this._isOwner = isOwner;
   }
 
   get id() {
     return this._id;
+  }
+
+  get tableToken() {
+    return this._tableToken;
   }
 
   get name() {
