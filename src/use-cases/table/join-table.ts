@@ -15,11 +15,13 @@ export class JoinTableUseCase {
     token,
     playerName,
   }: JoinTableUseCaseRequest): Promise<JoinTableUseCaseResponse> {
-    const table = await this.tablesRepository.findByToken(token);
+    const response = await this.tablesRepository.findByToken({ token });
 
-    if (!table) {
+    if (!response) {
       throw new ResourceNotFoundError("Table not found");
     }
+
+    const table = response.table;
 
     if (table.players.length >= 8) {
       throw new TableFullError(8);
@@ -33,7 +35,7 @@ export class JoinTableUseCase {
       throw new PlayerAlreadyExistsError();
     }
 
-    const player = new Player(playerName);
+    const player = new Player(playerName, false, token);
     table.addPlayer(player);
 
     return {
