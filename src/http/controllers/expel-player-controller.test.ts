@@ -35,4 +35,22 @@ describe("Expel a player E2E", () => {
     expect(response.body.players).toHaveLength(1);
     expect(response.body.players[0].name).toBe("John Doe");
   });
+
+  it("should return 404 if player does not exist", async () => {
+    const tableCreationResponse = await request(app.server)
+      .post("/tables")
+      .send({
+        tableName: "Poker table",
+        ownerName: "John Doe",
+      });
+
+    const table = tableCreationResponse.body.table;
+
+    const response = await request(app.server)
+      .delete(`/tables/NonExistentPlayer/expel`)
+      .send({ token: table.token });
+
+    expect(response.statusCode).toBe(404);
+    expect(response.body.error).toBe("Player not found");
+  });
 });
