@@ -1,6 +1,5 @@
 import { beforeEach, describe, expect, it } from "vitest";
 
-import { TCreateTableInputDTO } from "@/core/types/create-table-input";
 import { InMemoryTableRepository } from "@/repositories/in-memory/in-memory-tables-repository";
 import { ITablesRepository } from "@/repositories/tables-repository";
 
@@ -22,7 +21,7 @@ describe("CreateTableUseCase", () => {
     });
 
     expect(table.players).toHaveLength(1);
-    expect(table.name).toEqual("Poker Night");
+    expect(table.tableName).toEqual("Poker Night");
     expect(table.players[0].isOwner).toBe(true);
     expect(table.players[0].name).toBe("John Doe");
     expect(table.id).toBeDefined();

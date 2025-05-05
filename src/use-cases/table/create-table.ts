@@ -22,7 +22,8 @@ export class CreateTableUseCase {
     };
 
     const table = new Table({
-      name: parsed.tableName,
+      isLocked: false,
+      tableName: parsed.tableName,
       ownerId: ownerId,
       players: [owner],
     });

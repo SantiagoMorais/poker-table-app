@@ -27,8 +27,8 @@ export class Table {
     return this._id;
   }
 
-  get name() {
-    return this.props.name;
+  get tableName() {
+    return this.props.tableName;
   }
 
   get ownerId() {

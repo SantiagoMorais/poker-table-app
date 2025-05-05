@@ -29,7 +29,7 @@ export const createTableController = async (
     return reply.status(201).send({
       table: {
         id: table.id,
-        name: table.name,
+        tableName: table.tableName,
         owner: ownerName,
         token: table.token,
         players: table.players,

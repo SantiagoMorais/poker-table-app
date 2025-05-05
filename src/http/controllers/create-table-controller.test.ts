@@ -22,7 +22,7 @@ describe("Create Table E2E", () => {
     expect(table.body.table).toEqual(
       expect.objectContaining({
         id: expect.any(String),
-        name: "Poker table",
+        tableName: "Poker table",
         owner: "John Doe",
         token: expect.any(String),
         players: expect.arrayContaining([
