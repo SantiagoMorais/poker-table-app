@@ -4,9 +4,13 @@ export class GetPlayersFromTableUseCase {
   constructor(private tablesRepository: ITablesRepository) {}
 
   async execute(tableToken: string) {
-    const table = await this.tablesRepository.findByToken(tableToken);
+    const response = await this.tablesRepository.findByToken({
+      token: tableToken,
+    });
 
-    if (!table) throw new Error("Table not found");
+    if (!response) throw new Error("Table not found");
+
+    const table = response.table;
 
     return {
       players: table.players.map((player) => ({
