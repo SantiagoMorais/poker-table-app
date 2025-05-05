@@ -1,9 +1,9 @@
-import { InMemoryTableRepository } from "@/repositories/in-memory-repository/in-memory-table-repository";
+import { PrismaTablesRepository } from "@/repositories/prisma-repository/prisma-tables-repository";
 
 import { JoinTableUseCase } from "../table/join-table";
 
 export const makeJoinTableUseCase = () => {
-  const tableRepository = new InMemoryTableRepository();
+  const tableRepository = new PrismaTablesRepository();
 
   const useCase = new JoinTableUseCase(tableRepository);
 
